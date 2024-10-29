@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto</title>
+    <title>Información de Contacto</title>
     <!-- Bootstrap CSS v4.5 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -15,15 +15,42 @@
                     <div class="card-header text-center bg-primary text-white">
                         <h2>Información de Contacto</h2>
                     </div>
-                    <div class="card-body">
-                        <p><strong>Nombre:</strong> Juan Pérez</p>
-                        <p><strong>Teléfono:</strong> +34 600 123 456</p>
-                        <p><strong>Email:</strong> juan.perez@ejemplo.com</p>
+                    <div class="card-body" id="contact-info">
+                        <!-- Aquí se mostrarán los datos de la persona seleccionada -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Datos ficticios en JavaScript -->
+    <script>
+        const personas = {
+            "1": { nombre: "Juan Pérez", telefono: "+34 600 123 456", email: "juan.perez@ejemplo.com" },
+            "2": { nombre: "Ana López", telefono: "+34 600 654 321", email: "ana.lopez@ejemplo.com" },
+            "3": { nombre: "Carlos Ruiz", telefono: "+34 600 111 222", email: "carlos.ruiz@ejemplo.com" }
+        };
+
+        // Obtiene el parámetro "persona" de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const personaId = urlParams.get("persona") || "1"; // Si no se especifica, muestra la persona 1
+
+        // Selecciona el div donde se mostrará la información
+        const contactInfoDiv = document.getElementById("contact-info");
+
+        // Si existe la persona, muestra la información
+        if (personas[personaId]) {
+            const persona = personas[personaId];
+            contactInfoDiv.innerHTML = `
+                <p><strong>Nombre:</strong> ${persona.nombre}</p>
+                <p><strong>Teléfono:</strong> ${persona.telefono}</p>
+                <p><strong>Email:</strong> ${persona.email}</p>
+            `;
+        } else {
+            // Si no existe el ID, muestra un mensaje de error
+            contactInfoDiv.innerHTML = `<p class="text-danger">La persona solicitada no existe.</p>`;
+        }
+    </script>
     
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
